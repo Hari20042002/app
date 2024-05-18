@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /laravel/app # navigate into the folders
+            cd /home/github/laravel/app # navigate into the folders
             git pull
             php artisan cache:clear
             php artisan config:clear
