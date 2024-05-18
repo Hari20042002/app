@@ -11,7 +11,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy Mentor Application
+      - name: Test Application
         uses: appleboy/ssh-action@v0.1.2
         with:
           host: ${{ secrets.HOST }}
