@@ -1,4 +1,4 @@
-name: Laravels
+name: Laravel
 
 on:
   push:
@@ -19,11 +19,10 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            # Disable host key checking
-            export SSH_ARGS="-o StrictHostKeyChecking=no"
-            cd /home/github/laravel/app
+            cd /home/github/laravel/app # navigate into the folders
             git pull
             php artisan cache:clear
             php artisan config:clear
             php artisan view:clear
             php artisan route:clear
+	
