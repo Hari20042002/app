@@ -1,3 +1,2 @@
 # app
-My applications
-welcome buddy
+Its My applications
