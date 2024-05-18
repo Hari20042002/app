@@ -1,2 +1,2 @@
 # app
-applications
+my applications
