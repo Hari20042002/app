@@ -19,7 +19,9 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /home/github/laravel/app # navigate into the folders
+            # Disable host key checking
+            export SSH_ARGS="-o StrictHostKeyChecking=no"
+            cd /home/github/laravel/app
             git pull
             php artisan cache:clear
             php artisan config:clear
