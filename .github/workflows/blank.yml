@@ -11,32 +11,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-          # Debugging: List the contents and permissions of the .ssh directory
-          ls -la ~/.ssh
-          cat ~/.ssh/id_rsa  # For debugging only, remove or comment out after confirming
-
-      - name: Test SSH Connection
-        run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'echo "SSH connection successful"'
-        continue-on-error: true  # Continue the workflow even if this step fails to help with debugging
-
       - name: Deploy Mentor Application
         uses: appleboy/ssh-action@v0.1.2
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /laravel/app
+            cd /home/github/laravel/app # navigate into the folders
             git pull
             php artisan cache:clear
             php artisan config:clear
             php artisan view:clear
             php artisan route:clear
+	
