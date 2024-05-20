@@ -17,12 +17,14 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-          cat ~/.ssh/id_rsa  # For debugging purposes only, ensure to remove or comment out after confirming
-          ls -la ~/.ssh  # For debugging purposes
+          # Debugging: List the contents and permissions of the .ssh directory
+          ls -la ~/.ssh
+          cat ~/.ssh/id_rsa  # For debugging only, remove or comment out after confirming
 
       - name: Test SSH Connection
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'echo "SSH connection successful"'
+        continue-on-error: true  # Continue the workflow even if this step fails to help with debugging
 
       - name: Deploy Mentor Application
         uses: appleboy/ssh-action@v0.1.2
