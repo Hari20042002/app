@@ -34,7 +34,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /laravel
+            cd /laravel/app
             git pull
             php artisan cache:clear
             php artisan config:clear
