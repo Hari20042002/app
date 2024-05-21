@@ -1,2 +1,2 @@
 # app
-My applications !!
+My applications is !!
