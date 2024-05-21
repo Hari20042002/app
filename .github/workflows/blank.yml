@@ -1,27 +1,25 @@
-name: laravel-tests
+name: Laravel
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+
 
 jobs:
-  deploy:
+  laravel-tests:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Execute deployment commands over SSH
-      uses: appleboy/ssh-action@v0.1.2
-      with:
+     - name: Deploy Mentor Application
+       uses: appleboy/ssh-action@v0.1.2
+       with:
         host: ${{ secrets.SSH_HOST_PROD }}
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /laravel/app
+          cd /laravel/app # navigate into the folders
           git pull
           php artisan cache:clear
           php artisan config:clear
