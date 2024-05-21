@@ -17,7 +17,7 @@ jobs:
         host: ${{ secrets.SSH_HOST_PROD }}
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
-        script: |
+        run: |
           cd /laravel/app # navigate into the folders
           git pull
           php artisan cache:clear
